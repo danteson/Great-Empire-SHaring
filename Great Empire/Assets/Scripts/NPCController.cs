@@ -62,7 +62,7 @@ public class NPCController : MonoBehaviour {
 			{
 				chaseAgainCheck = true;
 			}
-			if (Distance == attackRange)
+			if (Distance < attackRange)
 			{
 				chaseAgainCheck = false;
 			}
@@ -76,7 +76,7 @@ public class NPCController : MonoBehaviour {
 	void lookAt ()
 	{
 		Quaternion rotation = Quaternion.LookRotation(TargetPlayer.position - transform.position);
-		transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 0.5f);
+		transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * Damping);
 	}
 
 	void chase ()
