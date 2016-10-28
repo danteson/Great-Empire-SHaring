@@ -1,12 +1,8 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\IntBars.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\Documents\New World\Assets\Scripts\RaycastFire.cs">
     <Files>
-      <File FileName="Assets\Scripts\IntBars.cs" Line="29" Column="6" />
-      <File FileName="Assets\Scripts\CharacterUI.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\NPCController.cs" Line="1" Column="1" />
-      <File FileName="..\..\..\Documents\Old Projects\Switch Online\Assets\Scripts\Monsters\SkyGolem\MobAI.cs" Line="1" Column="1" />
-      <File FileName="..\..\..\Documents\Old Projects\Alter Drone\Assets\Script\EnemyRelated\EnemyAI.cs" Line="38" Column="3" />
+      <File FileName="..\..\..\Documents\New World\Assets\Scripts\RaycastFire.cs" Line="122" Column="42" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

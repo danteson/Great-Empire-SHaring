@@ -28,7 +28,7 @@ public class Controller : MonoBehaviour {
 
 		anim = GetComponent<Animator> ();
 		
-		speed=10;
+		speed=30;
 		flySpeed=20;
 		jumpSpeed = 20;
 		offFlight = 40;

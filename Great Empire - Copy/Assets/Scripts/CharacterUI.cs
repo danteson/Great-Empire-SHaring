@@ -7,6 +7,8 @@ public class CharacterUI : MonoBehaviour {
 	public int talkCount = 0;
 	public Vector2 mousePosition;
 	public Vector2 screenPos;
+	public GameObject player;
+	public GameObject hpBar;
 
 	public Vector3 point;
 
@@ -56,14 +58,46 @@ public class CharacterUI : MonoBehaviour {
 				uiActive = 0;
 			}
 
-			if (GUI.Button (new Rect (screenPos.x+75, Screen.height/2+150, 70, 30), "Follow")) {
-				GetComponent<NPCController>().chaseBool = true;
-				talkCount = 1;
+			if (GUI.Button (new Rect (screenPos.x+75, Screen.height/2+150, 70, 30), "Follow") && GetComponent<NPCController>().chaseBool == false) {
+				if (player.GetComponent<PartySystem>().canParty) {
+					player.GetComponent<PartySystem>().partyCount += 1;
+					GetComponent<NPCController>().chaseBool = true;
+					talkCount = 1;
+					if (player.GetComponent<PartySystem>().partymember1 == null) {
+						player.GetComponent<PartySystem>().partymember1 = gameObject;
+					} else if (player.GetComponent<PartySystem>().partymember2 == null) {
+						player.GetComponent<PartySystem>().partymember2 = gameObject;
+					} else if (player.GetComponent<PartySystem>().partymember3 == null) {
+						player.GetComponent<PartySystem>().partymember3 = gameObject;
+					} else if (player.GetComponent<PartySystem>().partymember4 == null) {
+						player.GetComponent<PartySystem>().partymember4 = gameObject;
+					}
+				}
 			}
 
 			if (GUI.Button (new Rect (screenPos.x+150, Screen.height/2+150, 70, 30), "Unfollow")) {
 				GetComponent<NPCController>().chaseBool = false;
 				talkCount = 2;
+
+				if (player.GetComponent<PartySystem>().partymember1 == gameObject) {
+					player.GetComponent<PartySystem>().partymember1 = null;
+					player.GetComponent<PartySystem>().partyCount -= 1;
+				}
+
+				if (player.GetComponent<PartySystem>().partymember2 == gameObject) {
+					player.GetComponent<PartySystem>().partymember2 = null;
+					player.GetComponent<PartySystem>().partyCount -= 1;
+				}
+
+				if (player.GetComponent<PartySystem>().partymember3 == gameObject) {
+					player.GetComponent<PartySystem>().partymember3 = null;
+					player.GetComponent<PartySystem>().partyCount -= 1;
+				}
+
+				if (player.GetComponent<PartySystem>().partymember4 == gameObject) {
+					player.GetComponent<PartySystem>().partymember4 = null;
+					player.GetComponent<PartySystem>().partyCount -= 1;
+				}
 			}
 
 

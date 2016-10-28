@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\Controller.cs" />
      <Compile Include="Assets\Scripts\IntBars.cs" />
      <Compile Include="Assets\Scripts\NPCController.cs" />
+     <Compile Include="Assets\Scripts\PartySystem.cs" />
      <Compile Include="Assets\Scripts\SmoothLookAt.cs" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>C:/Users/Dmitri/Desktop/Great Empire/Great Empire/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>

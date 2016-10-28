@@ -4,6 +4,7 @@ using System.Collections;
 public class IntBars : MonoBehaviour {
 
 	public float Stat = 1;
+	public float maxStat = 1;
 
 	public float stage1 = 0;
 	public float stage2 = 0;
@@ -26,7 +27,7 @@ public class IntBars : MonoBehaviour {
 		transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 50f);
 
 		if (Input.GetKeyDown ("f") && Stat > 0) {
-			//Stat -= 20;
+			Stat -= 20;
 		}
 
 		if (Stat < 0) {
