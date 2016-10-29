@@ -63,6 +63,7 @@ public class CharacterUI : MonoBehaviour {
 	void OnMouseOver(){
 		if (Input.GetMouseButtonDown (1)) {
 			uiActive = 1;
+			player.GetComponent<PlayerController> ().toggleOrbit = 1;
 		}
 	}
 
@@ -82,6 +83,7 @@ public class CharacterUI : MonoBehaviour {
 
 			if (GUI.Button (new Rect (screenPos.x-270, Screen.height - screenPos.y-Screen.height/3.5f, 70, 30), "Cancel")) {
 				uiActive = 0;
+				player.GetComponent<PlayerController> ().toggleOrbit = 0;
 			}
 
 			if (GUI.Button (new Rect (screenPos.x - 195, Screen.height - screenPos.y-Screen.height/3.5f, 70, 30), "Follow") && GetComponent<NPCController>().chaseBool == false) {

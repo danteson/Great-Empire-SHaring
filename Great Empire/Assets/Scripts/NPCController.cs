@@ -22,6 +22,8 @@ public class NPCController : MonoBehaviour {
 	private Vector3 moveDirection = Vector3.zero;
 	
 	public int TheDammage = 40;
+
+	public bool bolean;
 	
 
 
@@ -68,8 +70,14 @@ public class NPCController : MonoBehaviour {
 			}
 		}
 		if (Distance > chaseAgain) {
-			GetComponent<CharacterUI>().uiActive = 0;
-			GetComponent<CharacterUI>().talkCount = 0;
+			if (bolean) {
+				GetComponent<CharacterUI> ().uiActive = 0;
+				GetComponent<CharacterUI> ().talkCount = 0;
+				TargetPlayer.GetComponent<PlayerController> ().toggleOrbit = 0;
+				bolean = false;
+			}
+		} else {
+			bolean = true;
 		}
 	}
 

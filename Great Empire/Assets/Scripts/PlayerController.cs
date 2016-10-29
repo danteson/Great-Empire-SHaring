@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Controller : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 	
 	private CharacterController character;
 	public GameObject CharCamera;
