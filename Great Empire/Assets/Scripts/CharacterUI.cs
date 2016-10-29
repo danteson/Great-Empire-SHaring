@@ -8,6 +8,7 @@ public class CharacterUI : MonoBehaviour {
 	public Vector3 screenPos;
 	public GameObject player;
 	public GameObject hpBar;
+	public GameObject camTargetObj;
 
 	Rect hpRect;
 	Texture2D hpTexture;
@@ -25,6 +26,8 @@ public class CharacterUI : MonoBehaviour {
 
 	public Transform target;
 	public GameObject camObj;
+	public GameObject camObjPos;
+	public GameObject charBody;
 	Camera camera;
 
 	public string talk1 = "";
@@ -32,9 +35,7 @@ public class CharacterUI : MonoBehaviour {
 	public string talk3 = "";
 
 	void Start() {
-		camera = camObj.GetComponent<Camera>();
-
-
+		camera = camObj.GetComponent<Camera> ();
 	}
 
 	void Update() {
@@ -58,6 +59,25 @@ public class CharacterUI : MonoBehaviour {
 		if (Input.GetKeyDown ("f") && Hp > 0) {
 			Hp -= 20;
 		}
+
+		if (GetComponent<NPCController> ().Distance < 20) {
+			if (uiActive == 1) {
+				camObj.transform.position = camTargetObj.transform.position;
+				camObj.transform.rotation = camTargetObj.transform.rotation;
+				charBody.SetActive (false);
+				player.GetComponent<PlayerController> ().enabled = false;
+			} else {
+				camObj.transform.position = camObjPos.transform.position;
+				camObj.transform.rotation = camObjPos.transform.rotation;
+				charBody.SetActive (true);
+				player.GetComponent<PlayerController> ().enabled = true;
+			}
+		}
+
+		if (Input.GetKeyDown ("f") && GetComponent<NPCController> ().Distance < 10) {
+			uiActive = 1;
+			player.GetComponent<PlayerController> ().toggleOrbit = 1;
+		}
 	}
 
 	void OnMouseOver(){
@@ -68,6 +88,10 @@ public class CharacterUI : MonoBehaviour {
 	}
 
 	void OnGUI () {
+		if (GetComponent<NPCController> ().Distance < 10 && uiActive == 0) {
+			GUI.Box(new Rect(Screen.width/2, Screen.height/2, 240, 30), "F to speak!");
+		}
+
 		if (uiActive == 1) {
 			if (talkCount == 0) {
 				GUI.Box(new Rect(screenPos.x-280, Screen.height - screenPos.y-Screen.height/2.2f, 240, 200), gameObject.name.ToString()+" : "+talk1.ToString());
