@@ -59,7 +59,7 @@ public class CharacterUI : MonoBehaviour {
 		}
 
 		if (Input.GetKeyDown ("f") && Hp > 0) {
-			Hp -= 20;
+			//Hp -= 20;
 		}
 
 		if (canSpeak == 1) {
@@ -76,9 +76,15 @@ public class CharacterUI : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetKeyDown ("f") && GetComponent<NPCController> ().Distance < 10) {
+		if (Input.GetKeyDown ("f") && GetComponent<NPCController> ().Distance2 < 10) {
 			uiActive = 1;
 			player.GetComponent<PlayerController> ().toggleOrbit = 1;
+		}
+
+		if (Input.GetKeyDown ("escape") && uiActive == 1) {
+			uiActive = 0;
+			talkCount = 0;
+			player.GetComponent<PlayerController> ().toggleOrbit = 0;
 		}
 	}
 
@@ -102,7 +108,7 @@ public class CharacterUI : MonoBehaviour {
 	}
 
 	void OnGUI () {
-		if (canSpeak == 1 && uiActive == 0 && GetComponent<NPCController>().Distance < 10) {
+		if (canSpeak == 1 && uiActive == 0 && GetComponent<NPCController>().Distance2 < 10) {
 			GUI.Box(new Rect(Screen.width/2, Screen.height/2, 240, 30), "F to speak!");
 		}
 
@@ -119,7 +125,7 @@ public class CharacterUI : MonoBehaviour {
 				GUI.Box(new Rect(screenPos.x-280, Screen.height - screenPos.y-Screen.height/2.2f, 240, 200), talk3.ToString());
 			}
 
-			if (GUI.Button (new Rect (screenPos.x-270, Screen.height - screenPos.y-Screen.height/3.5f, 70, 30), "Close")) {
+			if (GUI.Button (new Rect (screenPos.x-277, Screen.height - screenPos.y-Screen.height/3.5f, 77, 30), "Close(Esc)")) {
 				uiActive = 0;
 				talkCount = 0;
 				player.GetComponent<PlayerController> ().toggleOrbit = 0;

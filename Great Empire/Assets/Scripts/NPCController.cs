@@ -4,6 +4,7 @@ using System.Collections;
 public class NPCController : MonoBehaviour {
 	
 	public float Distance = 0f;
+	public float Distance2 = 0f;
 	public Transform TargetPlayer;
 	public Transform PartySlot1;
 	public Transform PartySlot2;
@@ -58,7 +59,7 @@ public class NPCController : MonoBehaviour {
 			playerPos += new Vector3 (PlayerXpos, 0, PlayerZpos);
 		}
 
-
+		Distance2 = Vector3.Distance(Player.position, transform.position);
 		Distance = Vector3.Distance(TargetPlayer.position, transform.position);
 		if (chaseBool) {
 			CharacterController controller = GetComponent<CharacterController>();
@@ -67,7 +68,8 @@ public class NPCController : MonoBehaviour {
 			
 
 			
-			if (Distance < lookAtDistance  && chaseAgainCheck == true)
+			if (Distance < lookAtDistance  && chaseAgainCheck == true &&
+				GetComponent<CharacterUI>().uiActive == 0)
 			{
 				lookAt();
 			}
@@ -76,10 +78,10 @@ public class NPCController : MonoBehaviour {
 			{
 				attack();
 			}
-			if (Distance < chaseRange && Distance > attackRange && chaseAgainCheck == true)
+			if (Distance < chaseRange && Distance > attackRange && chaseAgainCheck == true &&
+				GetComponent<CharacterUI>().uiActive == 0)
 			{
 				chase();
-
 			}
 
 
@@ -94,22 +96,15 @@ public class NPCController : MonoBehaviour {
 			}
 		}
 
-		if (Distance > chaseAgain) {
-			if (bolean) {
-				GetComponent<CharacterUI> ().uiActive = 0;
-				GetComponent<CharacterUI> ().talkCount = 0;
-				Player.GetComponent<PlayerController> ().toggleOrbit = 0;
-				bolean = false;
-			}
-		} else {
-			bolean = true;
-		}
+
 	}
 
 	void lookAt ()
 	{
-		Quaternion rotation = Quaternion.LookRotation(playerPos - transform.position);
-		transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * Damping);
+		Vector3 targetPostition = new Vector3(TargetPlayer.position.x,this.transform.position.y, TargetPlayer.position.z );
+		this.transform.LookAt (targetPostition);
+		//Quaternion rotation = Quaternion.LookRotation(TargetPlayer.position - transform.position);
+		//transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * Damping);
 	}
 
 	void chase ()
