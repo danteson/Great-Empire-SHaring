@@ -121,6 +121,7 @@ public class CharacterUI : MonoBehaviour {
 
 			if (GUI.Button (new Rect (screenPos.x-270, Screen.height - screenPos.y-Screen.height/3.5f, 70, 30), "Close")) {
 				uiActive = 0;
+				talkCount = 0;
 				player.GetComponent<PlayerController> ().toggleOrbit = 0;
 			}
 

@@ -5,6 +5,11 @@ public class NPCController : MonoBehaviour {
 	
 	public float Distance = 0f;
 	public Transform TargetPlayer;
+	public Transform PartySlot1;
+	public Transform PartySlot2;
+	public Transform PartySlot3;
+	public Transform PartySlot4;
+	public Transform Player;
 	public float lookAtDistance = 25.0f;
 	public float chaseRange = 15.0f;
 	public float attackRange = 1.5f;
@@ -36,14 +41,17 @@ public class NPCController : MonoBehaviour {
 	void Start () {
 		attacktime = Time.time;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		if (TargetPlayer.GetComponent<PartySystem> ().partymember1 == gameObject) {PlayerXpos = 0;PlayerZpos = 30;}
-		if (TargetPlayer.GetComponent<PartySystem> ().partymember2 == gameObject) {PlayerXpos = 0;PlayerZpos = -30;}
-		if (TargetPlayer.GetComponent<PartySystem> ().partymember3 == gameObject) {PlayerXpos = 25;PlayerZpos = 30;}
-		if (TargetPlayer.GetComponent<PartySystem> ().partymember4 == gameObject) {PlayerXpos = 25;PlayerZpos = -30;}
-
+		//if (TargetPlayer.GetComponent<PartySystem> ().partymember1 == gameObject) {PlayerXpos = 0;PlayerZpos = 30;}
+		//if (TargetPlayer.GetComponent<PartySystem> ().partymember2 == gameObject) {PlayerXpos = 0;PlayerZpos = -30;}
+		//if (TargetPlayer.GetComponent<PartySystem> ().partymember3 == gameObject) {PlayerXpos = 25;PlayerZpos = 30;}
+		//if (TargetPlayer.GetComponent<PartySystem> ().partymember4 == gameObject) {PlayerXpos = 25;PlayerZpos = -30;}
+		if (Player.GetComponent<PartySystem> ().partymember1 == gameObject) {TargetPlayer = PartySlot1;}
+		if (Player.GetComponent<PartySystem> ().partymember2 == gameObject) {TargetPlayer = PartySlot2;}
+		if (Player.GetComponent<PartySystem> ().partymember3 == gameObject) {TargetPlayer = PartySlot3;}
+		if (Player.GetComponent<PartySystem> ().partymember4 == gameObject) {TargetPlayer = PartySlot4;}
 
 		if (chaseAgainCheck) {
 			playerPos = TargetPlayer.transform.position;
@@ -90,7 +98,7 @@ public class NPCController : MonoBehaviour {
 			if (bolean) {
 				GetComponent<CharacterUI> ().uiActive = 0;
 				GetComponent<CharacterUI> ().talkCount = 0;
-				TargetPlayer.GetComponent<PlayerController> ().toggleOrbit = 0;
+				Player.GetComponent<PlayerController> ().toggleOrbit = 0;
 				bolean = false;
 			}
 		} else {
@@ -115,7 +123,7 @@ public class NPCController : MonoBehaviour {
 	{
 		if (Time.time > attacktime)
 		{
-			TargetPlayer.SendMessage("ApplyDammage", TheDammage);
+			//Player.SendMessage("ApplyDammage", TheDammage);
 			Debug.Log("The Enemy Has Attacked");
 			attacktime = Time.time + attackRepeatTime;
 		}
