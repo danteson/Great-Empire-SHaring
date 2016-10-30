@@ -24,8 +24,11 @@ public class NPCController : MonoBehaviour {
 	public int TheDammage = 40;
 
 	public bool bolean;
-	
 
+	public Vector3 playerPos;
+	
+	public int PlayerXpos;
+	public int PlayerZpos;
 
 
 
@@ -36,6 +39,18 @@ public class NPCController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (TargetPlayer.GetComponent<PartySystem> ().partymember1 == gameObject) {PlayerXpos = 0;PlayerZpos = 30;}
+		if (TargetPlayer.GetComponent<PartySystem> ().partymember2 == gameObject) {PlayerXpos = 0;PlayerZpos = -30;}
+		if (TargetPlayer.GetComponent<PartySystem> ().partymember3 == gameObject) {PlayerXpos = 25;PlayerZpos = 30;}
+		if (TargetPlayer.GetComponent<PartySystem> ().partymember4 == gameObject) {PlayerXpos = 25;PlayerZpos = -30;}
+
+
+		if (chaseAgainCheck) {
+			playerPos = TargetPlayer.transform.position;
+			playerPos += new Vector3 (PlayerXpos, 0, PlayerZpos);
+		}
+
+
 		Distance = Vector3.Distance(TargetPlayer.position, transform.position);
 		if (chaseBool) {
 			CharacterController controller = GetComponent<CharacterController>();
@@ -56,6 +71,7 @@ public class NPCController : MonoBehaviour {
 			if (Distance < chaseRange && Distance > attackRange && chaseAgainCheck == true)
 			{
 				chase();
+
 			}
 
 
@@ -69,6 +85,7 @@ public class NPCController : MonoBehaviour {
 				chaseAgainCheck = false;
 			}
 		}
+
 		if (Distance > chaseAgain) {
 			if (bolean) {
 				GetComponent<CharacterUI> ().uiActive = 0;
@@ -83,7 +100,7 @@ public class NPCController : MonoBehaviour {
 
 	void lookAt ()
 	{
-		Quaternion rotation = Quaternion.LookRotation(TargetPlayer.position - transform.position);
+		Quaternion rotation = Quaternion.LookRotation(playerPos - transform.position);
 		transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * Damping);
 	}
 

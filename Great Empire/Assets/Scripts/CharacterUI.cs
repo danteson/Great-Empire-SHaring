@@ -10,6 +10,8 @@ public class CharacterUI : MonoBehaviour {
 	public GameObject hpBar;
 	public GameObject camTargetObj;
 
+	public int canSpeak = 0;
+
 	Rect hpRect;
 	Texture2D hpTexture;
 
@@ -60,7 +62,7 @@ public class CharacterUI : MonoBehaviour {
 			Hp -= 20;
 		}
 
-		if (GetComponent<NPCController> ().Distance < 20) {
+		if (canSpeak == 1) {
 			if (uiActive == 1) {
 				camObj.transform.position = camTargetObj.transform.position;
 				camObj.transform.rotation = camTargetObj.transform.rotation;
@@ -80,6 +82,18 @@ public class CharacterUI : MonoBehaviour {
 		}
 	}
 
+	void OnTriggerEnter (Collider other) {
+		if (other.gameObject.tag == "FtoSpeak") {
+			canSpeak = 1;
+		}
+	}
+
+	void OnTriggerExit (Collider other) {
+		if (other.gameObject.tag == "FtoSpeak") {
+			canSpeak = 0;
+		}
+	}
+
 	void OnMouseOver(){
 		if (Input.GetMouseButtonDown (1)) {
 			uiActive = 1;
@@ -88,7 +102,7 @@ public class CharacterUI : MonoBehaviour {
 	}
 
 	void OnGUI () {
-		if (GetComponent<NPCController> ().Distance < 10 && uiActive == 0) {
+		if (canSpeak == 1 && uiActive == 0 && GetComponent<NPCController>().Distance < 10) {
 			GUI.Box(new Rect(Screen.width/2, Screen.height/2, 240, 30), "F to speak!");
 		}
 
@@ -105,7 +119,7 @@ public class CharacterUI : MonoBehaviour {
 				GUI.Box(new Rect(screenPos.x-280, Screen.height - screenPos.y-Screen.height/2.2f, 240, 200), talk3.ToString());
 			}
 
-			if (GUI.Button (new Rect (screenPos.x-270, Screen.height - screenPos.y-Screen.height/3.5f, 70, 30), "Cancel")) {
+			if (GUI.Button (new Rect (screenPos.x-270, Screen.height - screenPos.y-Screen.height/3.5f, 70, 30), "Close")) {
 				uiActive = 0;
 				player.GetComponent<PlayerController> ().toggleOrbit = 0;
 			}

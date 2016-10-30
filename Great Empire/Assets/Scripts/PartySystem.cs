@@ -64,8 +64,7 @@ public class PartySystem : MonoBehaviour {
 	void OnGUI () {
 		if (partymember1 != null) {
 			GUI.Box(new Rect(Screen.width / 100, Screen.height / 15f, Screen.width / 8, Screen.height / 20),partymember1.name );
-			float ratioHP = partymember1.GetComponent<CharacterUI>().hpBar.GetComponent<IntBars>().Stat / 
-			partymember1.GetComponent<CharacterUI>().hpBar.GetComponent<IntBars>().maxStat;
+			float ratioHP = partymember1.GetComponent<CharacterUI>().Hp / partymember1.GetComponent<CharacterUI>().maxHp;
 			float rectWidthHP = ratioHP*Screen.width / 10;
 			hpRect1.width = rectWidthHP;
 			GUI.DrawTexture (hpRect1, hpTexture1);
@@ -73,8 +72,7 @@ public class PartySystem : MonoBehaviour {
 
 		if (partymember2 != null) {
 			GUI.Box(new Rect(Screen.width / 100, Screen.height / 8f, Screen.width / 8, Screen.height / 20),partymember2.name );
-			float ratioHP = partymember2.GetComponent<CharacterUI>().hpBar.GetComponent<IntBars>().Stat / 
-				partymember2.GetComponent<CharacterUI>().hpBar.GetComponent<IntBars>().maxStat;
+			float ratioHP = partymember2.GetComponent<CharacterUI>().Hp / partymember2.GetComponent<CharacterUI>().maxHp;
 			float rectWidthHP = ratioHP*Screen.width / 10;
 			hpRect2.width = rectWidthHP;
 			GUI.DrawTexture (hpRect2, hpTexture2);
@@ -82,8 +80,7 @@ public class PartySystem : MonoBehaviour {
 
 		if (partymember3 != null) {
 			GUI.Box(new Rect(Screen.width / 100, Screen.height / 5.4f, Screen.width / 8, Screen.height / 20),partymember3.name );
-			float ratioHP = partymember3.GetComponent<CharacterUI>().hpBar.GetComponent<IntBars>().Stat / 
-				partymember3.GetComponent<CharacterUI>().hpBar.GetComponent<IntBars>().maxStat;
+			float ratioHP = partymember3.GetComponent<CharacterUI>().Hp / partymember3.GetComponent<CharacterUI>().maxHp;
 			float rectWidthHP = ratioHP*Screen.width / 10;
 			hpRect3.width = rectWidthHP;
 			GUI.DrawTexture (hpRect3, hpTexture3);
@@ -91,8 +88,7 @@ public class PartySystem : MonoBehaviour {
 
 		if (partymember4 != null) {
 			GUI.Box(new Rect(Screen.width / 100, Screen.height / 4f, Screen.width / 8, Screen.height / 20),partymember4.name );
-			float ratioHP = partymember4.GetComponent<CharacterUI>().hpBar.GetComponent<IntBars>().Stat / 
-				partymember4.GetComponent<CharacterUI>().hpBar.GetComponent<IntBars>().maxStat;
+			float ratioHP = partymember4.GetComponent<CharacterUI>().Hp / partymember4.GetComponent<CharacterUI>().maxHp;
 			float rectWidthHP = ratioHP*Screen.width / 10;
 			hpRect4.width = rectWidthHP;
 			GUI.DrawTexture (hpRect4, hpTexture4);
