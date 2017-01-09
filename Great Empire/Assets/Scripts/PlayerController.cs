@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour {
 			walking = true;
 			anim.SetBool("Walk", true);
 		}
-		else {
+		if (Input.GetKeyUp ("w")) {
 			anim.SetBool("Walk", false);
 			walking = false;
 		}
@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour {
 			walking = true;
 			anim.SetBool("WalkBack", true);
 		}
-		else {
+		if (Input.GetKeyUp ("s")) {
 			anim.SetBool("WalkBack", false);
 			walking = false;
 		}
